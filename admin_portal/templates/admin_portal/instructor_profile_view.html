@@ -1,0 +1,130 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+	<!-- Body Start -->
+	<div class="wrapper _bg4586">
+		<div class="_216b01">
+			<div class="container">			
+				<div class="row justify-content-md-center">
+					<div class="col-md-10">
+						<div class="section3125 rpt145">							
+							<div class="row">						
+								<div class="col-lg-7">
+								
+									<div class="dp_dt150">						
+										<div class="img148">
+											<img src="{{profile_img}}" alt="">										
+										</div>
+										<div class="prfledt1">
+											<h2>{{instance.name}} {{instance.surname}}</h2>
+											<span>{{instance.profession}}</span>
+										</div>										
+									</div>
+									<ul class="_ttl120">
+										<li>
+											<div class="_ttl121">
+												<div class="_ttl122">Videos Upload</div>
+												<div class="_ttl123">{{video_total}}</div>
+											</div>
+										</li>
+										<li>
+											<div class="_ttl121">
+												<div class="_ttl122">Audio Upload</div>
+												<div class="_ttl123">{{audio_total}}</div>
+											</div>
+										</li>
+										<li>
+											<div class="_ttl121">
+												<div class="_ttl122">Ebook Upload</div>
+												<div class="_ttl123">{{ebook_total}}</div>
+											</div>
+										</li>
+										<li>
+											<div class="_ttl121">
+												<div class="_ttl122">Signal Upload</div>
+												<div class="_ttl123">{{signal_total}}</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="col-lg-5">
+									{% if data is False %}
+										<a href="{% url 'members_portal:members_profile_settings' %}" class="_216b12">										
+											<span><i class="uil uil-cog"></i></span>Setting
+										</a>
+									{% else %}
+										<a href="{% url 'members_portal:members_profile_update' id=user.id %}" class="_216b12">										
+											<span><i class="uil uil-cog"></i></span>Setting
+										</a>
+									{% endif %}
+									<div class="rgt-145">
+										<ul class="tutor_social_links">
+											<li><a href="{{instance.facebook}}" class="fb"><i class="fab fa-facebook-f"></i></a></li>
+											<li><a href="{{instance.twitter}}" class="tw"><i class="fab fa-twitter"></i></a></li>
+											<li><a href="{{instance.linkedin}}" class="ln"><i class="fab fa-linkedin-in"></i></a></li>
+											<li><a href="{{instance.youtube}}" class="yu"><i class="fab fa-youtube"></i></a></li>
+										</ul>
+									</div>
+									<ul class="_bty149">
+										{% if user.is_staff %}
+										<li><a href="{% url 'admin_portal:admin_dashboard' %}"> <button class="studio-link-btn btn500">Dashboard</button></li>				
+										{% else %}
+										<li><a href="{% url 'members_portal:members_dashboard' %}"> <button class="studio-link-btn btn500">Dashboard</button></li>				
+										{% endif %}
+										<li>				
+										{% if data is False %}
+										<li><a href="{% url 'members_portal:members_profile_settings' %}"> <button class="msg125 btn500">Edit</button></a></li>								
+
+										{% else %}
+										<li><a href="{% url 'members_portal:members_profile_update' id=user.id %}"> <button class="msg125 btn500">Edit</button></a></li>								
+										{% endif %}	
+										</li>
+									</ul>	
+									
+								</div>													
+							</div>							
+						</div>							
+					</div>															
+				</div>
+			</div>
+		</div>
+		<div class="_215b15">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">						
+						<div class="course_tabs">
+							<nav>
+								<div class="nav nav-tabs tab_crse" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="true">About</a>
+									<!-- <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Discussion</a> -->
+								</div>
+							</nav>						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="_215b17">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="course_tab_content">
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-about" role="tabpanel">
+									<div class="_htg451">
+										<div class="_htg452">
+											<h3>About Me</h3>
+											<p>{{instance.about}}</p>
+										</div>																	
+									</div>							
+								</div>
+						
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	 {% endblock %}

@@ -1,0 +1,90 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-xl-12 col-lg-8">
+						<div class="section3125">
+							<div class="explore_search">
+								<div class="ui search focus">
+									<div class="ui left icon input swdh11">
+										<input class="prompt srch_explore" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more..">
+										<i class="uil uil-search-alt icon icon2"></i>
+									</div>
+								</div>
+							</div>							
+						</div>							
+					</div>
+					<div class="col-md-12">
+						{% include 'registration/messages.html' %}
+						
+					</div>
+					<div class="col-md-12">
+						<div class="_14d25">
+							<div class="row">
+								
+								{% for video_content in ordered_videos %}
+									<div class="col-lg-3 col-md-4">
+										<div class="fcrse_1 mt-30">
+											<a href="{% url 'members_portal:course_detail' video_content.id %}" class="fcrse_img">
+												{% if video_content.cover_img %}
+													<img src="{{video_content.cover_img.url}}" height= "130" alt="">
+												{% else %}
+													<img src="{% static 'images/courses/img-1.jpg' %}" alt="">
+												{% endif %}
+												<div class="course-overlay">
+													<div class="badge_seller">Most Rated</div>
+													<span class="play_btn1"><i class="uil uil-play"></i></span>
+													<div class="crse_timer">
+														{{video_content.date_created|naturaltime}}
+													</div>
+												</div>
+											</a>
+											<div class="fcrse_content">
+												<div class="eps_dots more_dropdown">
+													<a href="#"><i class="uil uil-ellipsis-v"></i></a>
+													<div class="dropdown-content">
+														{% if video_content.id in checked_result %}
+									                       	<a href="{% url 'members_portal:save_course' video_content.id %}">	
+																<span><i class="uil uil-heart"></i>Remove favorite</span>
+															</a>
+														{% else %}
+															<a href="{% url 'members_portal:save_course' video_content.id %}">	
+																<span><i class="uil uil-heart"></i>Save favorite</span>
+															</a>
+														{% endif %} 
+													</div>																											
+												</div>
+												<div class="vdtodt">
+													<span class="vdt14"></span>
+												</div>
+												<a href="video_detail_view.html" class="crse14s">{{video_content.title|title}} </a>
+												<a href="#" class="crse-cate">{{video_content.subtitle|title}}</a>
+											</div>
+										</div>													
+									</div>
+								{% endfor %}
+
+								<div class="col-md-12">
+									<div class="main-loader mt-50">													
+										<div class="spinner">
+											<div class="bounce1"></div>
+											<div class="bounce2"></div>
+											<div class="bounce3"></div>
+										</div>																										
+									</div>
+								</div>
+							</div>				
+						</div>				
+					</div>				
+				</div>
+			</div>
+		</div>
+
+
+	{% endblock %}

@@ -1,0 +1,40 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Left Sidebar End -->
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid" style="margin-bottom: 2em !important;">			
+				<div class="row">
+					<div class="col-lg-12">	
+						<h2 class="st_title"><i class="uil uil-bell"></i> Notifications</h2>
+					</div>					
+				</div>
+				{% for notification in notifications %}				
+				<div class="row" style="margin-bottom: -1.7em !important;">
+					<div class="col-12">
+							<div class="all_msg_bg">
+								<div class="channel_my item all__noti5">
+									<div class="profile_link">
+										<img src="{{notification.user.profile_img}}" alt="">
+										<div class="pd_content">
+											<h6>{{notification.user.username}}</h6>
+											<p class="noti__text5">{{notification.comment}}</p>
+											<span class="nm_time">{{notification.comment_date|naturaltime}}</span>
+										</div>							
+									</div>							
+								</div>
+							</div>
+					
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	
+
+		{% endblock %}

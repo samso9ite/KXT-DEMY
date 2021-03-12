@@ -1,0 +1,164 @@
+{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container">			
+				<div class="row">
+					<div class="col-lg-12">	
+						<h2 class="st_title"><i class="uil uil-analysis"></i> Risk Management Calculator </h2>
+						{% include 'registration/messages.html' %}
+							
+					</div>					
+				</div>				
+				<div class="row">
+					<div class="col-12">
+						<div class="step-tab-panel step-tab-location" id="tab_step3">
+							<div class="tab-from-content">
+								<form method="POST" id="calculator_form">
+								{% csrf_token %}
+									<div class="course__form">
+										<div class="row">
+											<div class="col-lg-12">		
+												<div class="extra_info">		
+													<h4 class="part__title">Fill in All Details</h4>
+												</div>
+												<div class="view_info10">
+													<div class="row">
+														
+														<div class="col-lg-6 col-md-6">															
+															<div class="ui search focus mt-30 lbel25">
+																<label> Market*</label>
+																<div class="ui left icon input swdh19 swdh55" style="">
+																	<select class="ui hj145 dropdown cntry152 prompt srch_explore" id="lot_size" name="lot_size">
+																		<option value="">Select Market</option>
+																		{% for market in all_market %}
+																			<option name="market" id="lot_size" value="{{market.lot_size}}">{{market.market_name}}  = {{market.points}}points </option>
+																		{% endfor %}
+																	
+																	</select>
+																	<div class="badge_min"> Market </div>
+																</div>
+															</div>									
+														</div>
+														
+														
+														<div class="col-lg-6 col-md-6">															
+															<div class="ui search focus mt-30 lbel25">
+																<label>Account Balance*</label>
+																<div class="ui left icon input swdh19 swdh95">
+																	<input class="prompt srch_explore balance" type="" min="0" name="account_balance" id="account_balance" required="" placeholder="0">															
+																	<div class="badge_mb"> USD </div>
+																</div>
+															</div>									
+														</div>
+														<div class="col-lg-6 col-md-6">															
+															<div class="ui search focus mt-30 lbel25">
+																<label> Stop Loss*</label>
+																<div class="ui left icon input swdh19 swdh55">
+																	<input class="prompt srch_explore percentage_risk" type="" min="0" id="stop_loss" name="stop_loss" required="" placeholder="0">															
+																	<div class="badge_min"> points </div>
+																</div>
+															</div>									
+														</div>
+
+														<div class="col-lg-6 col-md-6">															
+															<div class="ui search focus mt-30 lbel25">
+																<label>Percentage Risk*</label>
+																<div class="ui left icon input swdh19 swdh55">
+																	<input class="prompt srch_explore percentage_risk" type="" min="0" id="percentage_risk" name="percentage_risk" required="" placeholder="0">															
+																	<div class="badge_min"> % </div>
+																</div>
+															</div>									
+														</div>
+														
+														<div style="text-align: center;" class="col-lg-12 col-md-12">															
+															<div class="ui search focus mt-30 lbel25">
+																<div class="ui left icon input swdh19 swdh55" style="margin-top: 6%;">
+																	<button class="save_content_btn" onclick="calculate()" style="width:100%" type="button">Calculate Lot Size </button>
+																</div>
+															</div>									
+														</div>
+														
+													
+													</span>
+														<div class="col-lg-12 col-md-12">
+															<div class="row save_content">
+															<h3 style="padding-left: 1%;"><center>Result</center></h3>
+														</div>
+														<div class="row">
+															<div class="col-lg-6 col-md-6">															
+																<div class="ui search focus mt-30 lbel25">
+																	<label>Lot Size</label>
+																	<div class="ui left icon input swdh19 swdh55">
+																		<input class="prompt srch_explore" type="text" min="0" name="duration" id="lot_size_result" placeholder="0">															
+																		<div class="badge_min" id="test">Lot_Size</div>
+																	</div>
+																</div>									
+															</div>
+															<div class="col-lg-6 col-md-6">															
+																<div class="ui search focus mt-30 lbel25">
+																	<label>Amount to loose</label>
+																	<div class="ui left icon input swdh19 swdh55">
+																		<input class="prompt srch_explore" style="color: white;" type="text" min="0" name="duration" id="amount_loose_result" placeholder="0">															
+																		<div class="badge_min">USD</div>
+																	</div>
+																</div>									
+															</div>
+														</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+						
+							 </div>
+						</div>
+						
+                    </div>
+				</div>
+			</div>
+        </div>
+        <br>
+		<br>
+
+		<script>
+			function calculate(){
+				console.log("checking")
+				$.ajax({
+					type:'POST',	
+					url: "{% url 'members_portal:risks_calculator' %}",
+					data:{
+						stop_loss: $('#stop_loss').val(),
+						lot_size: $('#lot_size').val(),
+						account_balance: $('#account_balance').val(),
+						percentage_risk: $('#percentage_risk').val(),
+						csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+						// action:'post'
+					},
+					success : function(response){
+						console.log(response);
+						response = Object.values(response)
+					    // console.log(response.lot_size_result)
+						document.getElementById('lot_size_result').value = response[0].lot_size_result
+					    document.getElementById('amount_loose_result').value = response[0].amount_to_loose
+						alert("Lot size Calculated")
+						return false;
+
+					},
+
+					error : function(xhr,errmsg,err) {
+					console.log(xhr.status + ": " + xhr.responseText);}
+					}) 
+
+			}
+
+		</script>
+
+	
+		{% endblock %}

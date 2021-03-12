@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+	{% extends 'registration/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+
+
+	<!-- Header Start -->
+	<header class="header clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="back_link">
+					</div>
+					<div class="ml_item">
+						<div class="main_logo " id="logo">
+							<a href="index.html"><img src="{% static 'images/main_logo.png' %}" alt=""  style="float: left;"></a>
+							<a href="index.html"><img class="logo-inverse" src="{% static 'images/main_logo2.png' %}" alt=""></a>
+						</div>				
+					</div>				
+					<div class="header_right pr-0">
+						<ul>				
+							<li class="ui top right">
+								<div class="back_link">
+									<a href="{% url 'authentication:signup' %}" class="" style="background-color: #199c10; color: white;">Sign Up / Sign In</a>
+									<!-- <a href="index.html" class="hde152">Back</a> -->
+								</div>
+								
+							</li>
+						</ul>
+					</div>		
+				</div>		
+			</div>
+		</div>
+	</header>
+	<!-- Header End -->
+	<!-- Body Start -->
+	<div class="wrapper _bg4586 _new89">		
+		<div class="_215cd2">
+			<div class="container" >
+				<div class="row">
+					<div class="col-lg-12" >						
+						<div class="title129 mt-35 mb-35">	
+							<h2>We Help Speed Up Financial Well-Being</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="_215td5">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="title589 text-center">
+							<h2>KXT 'DEMY</h2>
+							<!-- <p>KXT 'DEMY':</p> -->
+							<img class="line-title" src="images/line.svg" alt="">
+						</div>
+					</div>
+					<div class="col-lg-3  col-sm-6">
+						<div class="feature125">
+							<!-- <span class="iconify" data-icon="uil:book-reader" data-inline="false"></span> -->
+							<i class="uil uil-book-reader" style="color: #199c10;"></i>
+							<h4>New Webinars Weekly </h4>
+							<p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+						</div>
+					</div>
+					<div class="col-lg-3  col-sm-6">
+						<div class="feature125">
+
+							<i class="uil uil-presentation-play" style="color: #199c10;"></i>
+							<h4>A-Z Video Lessons</h4>
+							<p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+						</div>
+					</div>
+					<div class="col-lg-3  col-sm-6">
+						<div class="feature125">
+							<i class="uil uil-book-open" style="color: #199c10;"></i>
+							<h4>Forex Books & Articles</h4>
+							<p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+						</div>
+					</div>
+					<div class="col-lg-3  col-sm-6">
+						<div class="feature125">
+							<i class="uil uil-signal-alt-3" style="color: #199c10;"></i>
+							<h4>Signals & Risk Management</h4>
+							<p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="_215zd5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="title478">
+							<h2>Our Story</h2>
+							<img class="line-title" src="images/line.svg" alt="">
+							<p style="text-align: justify;"><b> KXT 'DEMY </b> is a virtual institution that helps you speed up your financial well-being.
+
+								This is achieved by your usage of our tested and proven forex trading program, member area, signal service and the VIP section.
+								
+								<br>The forex trading program has made many young individuals improve their financial health by 500% because of its simplicity, the height of risk management and emotional control [our specialization]
+								
+								The mentorship area is where we share ideas with other members, questions are answered, we interact with other traders and build a strong community relationship.
+								
+								KXT signal service is a whole different package with automated systems in place that will will guide you on how to use this software signals without losing your money.. In our analytics so far, we've hardly recorded a losing user.
+								
+								The VIP section is a monthly workshop whereby the academy experts hold live sessions and drop recorded sessions about the market.
+								
+								 <!-- They will help you learnt more about the monthly market behavior, why set ups where won and lost and other live trade improvements to make you an indestructible trader.</p > -->
+						</div>
+						<div class="back_link">
+							<a href="{% url 'authentication:plans' %}" class="hde151" style="background-color: #199c10; color: white;">Check Plan</a>
+							<!-- <a href="index.html" class="hde152">Back</a> -->
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="jmio125">
+							<img src="{%  static 'images/bg_logo.png' %}" alt="" >
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="_215td5">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="title589 text-center">
+							<h2>Our Resources</h2>
+							<p>KXT 'DEMY  is the leading  academy for teaching and learning of forex trading, giving members the right information towards a successful trading.  </p >
+							<img class="line-title" src="{%  static 'images/line.svg' %}" alt="">
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="p__metric">
+							20+
+							<span>Videos</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="p__metric">
+							15+
+							<span>Audios</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="p__metric">
+							10+
+							<span>Books & Articles</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="p__metric">
+							15+
+							<span>Risk Management Tools</span>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="_215xd5">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="title589 text-center">
+							<h2>Testimonials</h2>
+							<p>A little testimonials from my <b>KXT 'DEMY</b> student.</p>
+							<img class="line-title" src="{%  static 'images/line.svg' %}" alt="">
+						</div>						
+					</div>
+					<div class="col-xl-12 col-lg-12">
+						<div class="section3125 mt-30">
+								<div class="la5lo1">
+								<div class="owl-carousel Student_says owl-theme">
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>"For that signal, i'm so happy, even though i miss signals i still wait for others, and this has helped build my discipline. As i have been accostumed to boom and crash movement. I really appreciate <b>KXT 'DEMY </b>"</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-4.jpg' %}" alt="">												
+												</div>
+												<h4>Steve</h4>
+											</div>											
+										</div>
+									</div>
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>"<b>KXT 'DEMY</b> tutorials very good. his price actions videos are so explanatory and practical based, he teaches very good and also his predictions on the next price actions most times are most times correct, i will advice you to join his academy. "</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-7.jpg' %}" alt="">												
+												</div>
+												<h4>Mary Suleiman</h4>
+											</div>											
+										</div>
+									</div>
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>"His strategy has actually been working for me, i analyse the market professionally now. i don't beleive getting to this level of professionalism in trading, he taught a lot about risk management which has really helped me in managing risk."</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-3.jpg' %}" alt="">												
+												</div>
+												<h4> Jones</h4>
+											</div>											
+										</div>
+									</div>
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p style="text-align: justify;">"After successfully completing the training i funded with $100 and made over $250 within 5days of trading. Withdrew $150 and even hosted a party. After that i traded with my $100 that was left. And after a week i blew the account. I got mad and funded after a day."</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-1.jpg' %}" alt="">												
+												</div>
+												<h4>Chibuike</h4>
+											</div>											
+										</div>
+									</div>
+									
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p style="text-align: justify;">"I am a proud member of <b>KXT 'DEMY</b> because since i join the academy i have been able to blow up my account, with just a single trade i was able to double my account thanks to his winning strategy. Join <b>KXT 'DEMY </b> to fire up your millionaire lifestyle."</p>
+										
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-6.jpg' %}" alt="">												
+												</div>
+												<h4>Ife</h4>
+											</div>											
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="footer_bottm">
+							<div class="row">
+								<div class="col-md-6">
+									<ul class="fotb_left">
+										<li>
+											<a href="index.html">
+												<div class="footer_logo">
+													<img src="{%  static 'images/favicon2.png' %}" alt="">
+												</div>
+											</a>
+										</li>
+										<li>
+											<p>© 2020 <strong>KXT 'DEMY</strong>. All Rights Reserved.</p>
+										</li>
+									</ul>
+								</div>
+								<div class="col-md-6">
+									<div class="edu_social_links">
+										<a href="#"><i class="fab fa-facebook-f"></i></a>
+										<a href="#"><i class="fab fa-twitter"></i></a>
+										<a href="#"><i class="fab fa-instagram"></i></a>
+										<a href="#"><i class="fab fa-youtube"></i></a>
+									
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- Body End -->
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container">			
+				<div class="row">
+					<div class="col-lg-12">	
+						<h2 class="st_title"><i class="uil uil-analysis"></i> Create Discussion Topic</h2>
+					</div>	
+					</div>				
+				<div class="row">
+					<div class="col-12">
+						<div class="">
+							<div id="" class="">
+								{% include 'registration/messages.html' %}				
+				
+								<div class="">
+									<div class="" id=""> 
+										<div class="tab-from-content">
+											<form method="POST" id="courseSubmit" action="" name="courseSubmit" enctype="multipart/form-data">
+
+												{% if form.errors %}
+							<div id="errors">
+								<div class="inner">
+									<p>There were some errors in the information you entered. Please correct the following:</p>
+									<ul>
+										{% for field in form %}
+											{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+									<!-- /Error messaging -->
+								{% endif %}
+								
+											
+                        					{% csrf_token %}
+												<div class="course__form">
+													<div class="general_info10">
+														<div class="row">
+															<div class="col-lg-10 col-md-10">															
+																<div class="ui search focus mt-30 lbel25">
+																	<label>Discussion Topic*</label>
+																	<div class="ui left icon input swdh19">
+																		<input class="prompt srch_explore" type="text" placeholder="Insert discussion topic." name="topic" data-purpose="edit-course-title" maxlength="120" id="main[title]" value="">															
+																		<div class="badge_num">120</div>
+																	</div>
+																</div>									
+															</div>
+															
+															<div class="col-lg-12 col-md-12">
+																<div class="course_des_textarea mt-30 lbel25">
+																	<label>Discussion Content*</label>
+																	<div class="course_des_bg">
+																		<div class="textarea_dt">															
+																			<div class="ui form swdh339">
+																				<div class="field">
+																					<textarea rows="5" name="content" id="id_course_description" placeholder="Insert  discussion content" value=""></textarea>
+																				</div>
+																			</div>										
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												
+												</div>
+										
+										</div>
+									</div>
+								<div class=""><br><br>
+									<button data-direction="finish" type="submit" class="btn btn-default steps_btn">Create New Topic</button>
+								</div>
+								<br><br>
+							</div>
+						</form>
+                        </div>
+                    </div>	
+{% endblock %}

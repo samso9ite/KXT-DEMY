@@ -1,0 +1,503 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
+		<meta name="description" content="Gambolthemes">
+		<meta name="author" content="247dgtbuilders">
+		{% block title %} {% endblock %}
+		
+		<!-- Favicon Icon -->
+		<link rel="icon" type="image/png" href="images/favicon.png">
+		
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet'>
+		<link href="{% static 'vendor/unicons-2.0.1/css/unicons.css' %}" rel='stylesheet'>
+		<link href="{% static 'css/vertical-responsive-menu.min.css' %}" rel="stylesheet">
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+		<link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+		<link href="{% static 'css/night-mode.css' %}" rel="stylesheet">
+		<link href="{% static 'css/jquery-steps.css' %}" rel="stylesheet">
+
+		<link href="{% static 'css/instructor-dashboard.css' %}" rel="stylesheet">
+		<link href="{% static 'css/instructor-responsive.css' %}" rel="stylesheet">
+	
+		<!-- Vendor Stylesheets -->
+		<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+		<link href="{% static 'vendor/OwlCarousel/assets/owl.carousel.css' %}" rel="stylesheet">
+		<link href="{% static 'vendor/OwlCarousel/assets/owl.theme.default.min.css' %}" rel="stylesheet">
+		<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/semantic/semantic.min.css' %}">	
+		
+    </head> 
+    
+    	<!-- Header Start -->
+	<header class="header clearfix">
+		<button type="button" id="toggleMenu" class="toggle_menu">
+		  <i class='uil uil-bars'></i>
+		</button>
+		<button id="collapse_menu" class="collapse_menu">
+			<i class="uil uil-bars collapse_menu--icon "></i>
+			<span class="collapse_menu--label"></span>
+		</button>
+		<div class="main_logo" id="logo">
+			<a href="student_dashboard.html"><img src="{%  static 'images/main_logo.png' %}" alt=""></a>
+			<a href="student_dashboard.html"><img class="logo-inverse" src="{%  static 'images/main_logo2.png' %}" alt=""></a>
+		</div>
+		<div class="top-category">
+			<div class="ui compact menu cate-dpdwn">
+				<div class="ui simple dropdown item">
+					<a href="#" class="option_links p-0" title="categories"><i class="uil uil-apps"></i></a>
+					
+				</div>
+			</div>
+		</div>
+		<div class="search120">
+			<div class="ui search">
+			  <div class="ui left icon input swdh10">
+				<input class="prompt srch10" type="text" placeholder="Search for ..">
+				<i class='uil uil-search-alt icon icon1'></i>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="header_right">
+		
+			<ul>
+			
+				{% if user.is_staff is False %}
+				{% if package is 4 %}
+					<li>
+						<span style="float: right; color: yellow; font-weight: 900;">
+							Trial !
+							<!-- <button type="button" class="btn btn-outline-warning btn-rounded waves-effect"> Trial ! </button> -->
+						</span>
+					</li>
+				{% endif %}
+				<li>
+					<a href="{% url 'members_portal:signals' %}" class="upload_btn" title="Check Signals">Check Signals</a>
+				</li>
+					<li class="ui dropdown">
+					<a href="#" class="option_links" title="Messages"><i class='uil uil-signal-alt-3'></i><span class="noti_count">{{signals_count}}</span></a>
+					<div class="menu dropdown_ms">
+						{% for signal in list_signals %}
+						<a href="#" class="channel_my item">
+							<div class="profile_link">
+								<img src="{%  static 'images/keeks.jpeg'  %}" alt="">
+								<div class="pd_content">
+									<h6>{{signal.signal_title}}</h6>
+									<p>{{signal.signal_content}}</p>
+									<span class="nm_time">{{signal.signal_date|naturaltime}}</span>
+								</div>							
+							</div>							
+						</a>
+						{% endfor %}
+						
+						<a class="vbm_btn" href="{% url 'members_portal:signals' %}">View All <i class='uil uil-arrow-right'></i></a>
+					</div>
+				</li>
+				{% endif %}
+				<li class="ui dropdown">
+					<a href="#" class="option_links" title="Notifications"><i class='uil uil-bell'></i><span class="noti_count">{{notification_count}}</span></a>
+					<div class="menu dropdown_mn">
+						{% for notification in comments %}
+							<a href="#" class="channel_my item">
+								<div class="profile_link">
+									<img src="{{notification.user.members_profile.profile_img.url}}" alt="">
+									<div class="pd_content">
+										<h6>{{notification.user.username}}</h6>
+										<p>{{notification.comment}}</p>
+										<span class="nm_time">{{notification.comment_date|naturaltime}}</span>
+									</div>							
+								</div>							
+							</a>
+						{% endfor %}
+						{% if user.is_staff %}
+							<a class="vbm_btn" href="{% url 'admin_portal:notifications' %}">View All <i class='uil uil-arrow-right'></i></a>
+						{% else %}
+							<a class="vbm_btn" href="{% url 'members_portal:notifications' %}">View All <i class='uil uil-arrow-right'></i></a>
+						{% endif %}
+					</div>
+				</li>
+				<li class="ui dropdown">
+					<a href="#" class="opts_account" title="Account">
+						{% if profile_img %}
+						<img src="{{profile_img}}" height="37"  width="65" alt="">
+						{% else %}
+						<img src="{%  static 'images/hd_dp.jpg'  %}" alt="">
+						{% endif %}
+					
+						</a>
+					<div class="menu dropdown_account">
+						<div class="channel_my">
+							<div class="profile_link">
+								{% if profile_img %}
+								<img src="{{profile_img}}" height="36"  width="55" alt="">
+								{% else %}
+								<img src="{%  static 'images/hd_dp.jpg'  %}" alt="">
+								{% endif %}
+								<div class="pd_content">
+									<div class="rhte85">
+										<h6>{{user.username|upper}} </h6>
+										<div class="mef78" title="Verify">
+											<i class='uil uil-check-circle'></i>
+										</div>
+									</div>
+									<span>{{user.email|lower}}</span>
+								</div>							
+							</div>
+							
+							{% if data is True and user.is_staff == False %}
+								<a href="{% url 'members_portal:members_profile_details' user.id %}" class="dp_link_12">View Profile</a>			
+							{% elif data is True and user.is_staff %}
+								<a href="{% url 'admin_portal:admin_profile' id=user.id %}" class="dp_link_12">View Profile  </a>
+							{% else %}
+								<a href="{% url 'members_portal:members_profile_settings' %}" class="dp_link_12">View Profile  </a>
+							{% endif %}
+						</div>
+						<div class="night_mode_switch__btn">
+							<a href="#" id="night-mode" class="btn-night-mode">
+								<i class="uil uil-moon"></i> Night mode
+								<span class="btn-night-mode-switch">
+									<span class="uk-switch-button"></span>
+								</span>
+							</a>
+						</div>
+						<a href="feedback.html" class="item channel_item">Send Feedback</a>
+						<a href="{% url 'authentication:logout' %}" class="item channel_item">Sign Out</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<!-- Header End -->
+	<!-- Left Sidebar Start -->
+	{% if user.is_staff %}
+
+		<!-- Left Sidebar Start -->
+		<nav class="vertical_nav">
+			<div class="left_section menu_left" id="js-menu" >
+				<div class="left_section">
+					<ul>
+						
+						<li class="menu--item">
+							<a href="{% url 'admin_portal:admin_dashboard' %}" class="menu--link active" title="Dashboard">
+								<i class="uil uil-apps menu--icon"></i>
+								<span class="menu--label">Dashboard</span>
+							</a>
+						</li>
+						<li class="menu--item">
+							<a href="{% url 'admin_portal:video_list' %}" class="menu--link" title="Courses">
+								<i class='uil uil-book-alt menu--icon'></i>
+								<span class="menu--label">Courses</span>
+							</a>
+						</li>
+						<li class="menu--item">
+							<a href="{% url 'admin_portal:create_course' %}" class="menu--link" title="Create Course">
+								<i class='uil uil-plus-circle menu--icon'></i>
+								<span class="menu--label">Create Course / Signal Edu </span>
+							</a>
+						</li>
+						<li class="menu--item menu--item__has_sub_menu">
+							<label class="menu--link" title="Categories">
+								<i class='uil uil-plus-circle  menu--icon'></i>
+								<span class="menu--label">Signals</span>
+							</label>
+							
+							<ul class="sub_menu">
+								<li class="sub_menu--item">
+									<a href="{% url 'admin_portal:signals' %}" class="sub_menu--link">Create Signal</a>
+								</li>
+								<li class="sub_menu--item">
+									<a href="{% url 'admin_portal:all_signals' %}" class="sub_menu--link">All Signals</a>
+								</li>
+							</ul>
+						</li>
+						
+						
+						<li class="menu--item">
+							<a href="{% url 'admin_portal:all_topics' %}" class="menu--link" title="Notifications">
+							  <i class='uil uil-comment-alt-question menu--icon'></i>
+							  <span class="menu--label">Discussion Forum</span>
+							</a>
+						</li>
+						<li class="menu--item">
+							<a href="{% url 'admin_portal:notifications' %}" class="menu--link" title="Notifications">
+							  <i class='uil uil-bell menu--icon'></i>
+							  <span class="menu--label">Notifications</span>
+							</a>
+						</li>
+						<li class="menu--item">
+							<a href="{% url 'admin_portal:create_market' %}" class="menu--link" title="Notifications">
+							  <i class='uil uil-dollar-sign  menu--icon'></i>
+							  <span class="menu--label"> Create Market</span>
+							</a>
+						</li>
+						<li class="menu--item">
+							<a href="{% url 'members_portal:risk_calculator' %}" class="menu--link" title="Notifications">
+							  <i class='uil uil-calculator-alt menu--icon'></i>
+							  <span class="menu--label">Risk Calculator</span>
+							</a>
+						</li>
+						<li class="menu--item">
+							<a href="{% url 'admin_portal:all_members' %}" class="menu--link" title="Notifications">
+							  <i class='uil uil-users-alt menu--icon'></i>
+							  <span class="menu--label">All Members </span>
+							</a>
+						</li>
+						<li class="menu--item">
+							<a href="{% url 'authentication:plans' %}" class="menu--link" title="Statements">
+							  <i class='uil uil-file-alt menu--icon'></i>
+							  <span class="menu--label">Payments</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="left_footer">
+					<ul>
+						<li><a href="{% url 'authentication:home' %}">Home</a></li>
+						<li><a href="{% url 'authentication:plans' %}"> Subscription Plans</a></li>
+						
+					</ul>
+					<div class="left_footer_content">
+						<p>© 2020 <strong>KXT 'DEMY</strong>. All Rights Reserved. <br>Developed by <strong><a href=""> 247 Digital Builders</a></strong></p>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- Left Sidebar End -->
+
+
+
+	{% elif package is 2 or 1 or 4 %}
+	<nav class="vertical_nav">
+		<div class="left_section menu_left" id="js-menu" >
+			<div class="left_section">
+				<ul>
+					<li class="menu--item">
+						<a href="{% url 'members_portal:members_dashboard' %}" class="menu--link active" title="Home">
+							<i class='uil uil-home-alt menu--icon'></i>
+							<span class="menu--label">Home</span>
+						</a>
+					</li>
+					<label class="menu--link" title="Categories">
+						<i class='uil uil-layers menu--icon'></i>
+						<span class="menu--label">Categories</span>
+					</label>
+					<li class="menu--item menu--item__has_sub_menu">
+						<label class="menu--link" title="">
+							<i class='uil  uil-presentation-play menu--icon'></i>
+							<span class="menu--label">Videos</span>
+						</label>
+						<ul class="sub_menu">
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:all_videos' %}" class="sub_menu--link">All Videos</a>
+							</li>
+
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:favorite_videos' %}" class="sub_menu--link">Favorite Videos</a>
+							</li>
+						</ul>
+					</li>
+					<li class="menu--item menu--item__has_sub_menu">
+						<label class="menu--link" title="Categories">
+							<i class='uil  uil-headphones  menu--icon'></i>
+							<span class="menu--label">Audios</span>
+						</label>
+						<ul class="sub_menu">
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:all_audios' %}" class="sub_menu--link">All Audios</a>
+							</li>
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:favorite_audios' %}" class="sub_menu--link">Favorite Audios</a>
+							</li>
+						</ul>
+					</li>
+				
+					<li class="menu--item menu--item__has_sub_menu">
+						<label class="menu--link" title="Categories">
+							<i class='uil uil-book-alt menu--icon'></i>
+							<span class="menu--label">Ebooks</span>
+						</label>
+						<ul class="sub_menu">
+					
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:all_ebooks' %}" class="sub_menu--link">All Ebooks</a>
+							</li>
+
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:favorite_ebooks' %}" class="sub_menu--link">Favorite Ebooks</a>
+							</li>
+						</ul>
+					</li>
+				
+					<li class="menu--item">
+						<a href="{% url 'members_portal:signals' %}" class="menu--link" title="Saved Courses">
+						  <i class="uil uil-signal-alt-3 menu--icon"></i>
+						  <span class="menu--label">Signals</span>
+						</a>
+					</li>
+					<li class="menu--item menu--item__has_sub_menu">
+						<label class="menu--link" title="Categories">
+							<i class="uil uil-presentation-lines-alt menu--icon"></i>
+							<span class="menu--label">Signal Education</span>
+						</label>
+
+						<ul class="sub_menu">
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:all_signals' %}" class="sub_menu--link">All Signals Education</a>
+							</li>
+
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:favorite_signals' %}" class="sub_menu--link">Favorite Signal Education</a>
+							</li>
+						</ul>
+					</li>
+					<li class="menu--item">
+						<a href="{% url 'members_portal:risk_calculator' %}" class="menu--link" title="Notifications">
+						  <i class='uil uil-bell menu--icon'></i>
+						  <span class="menu--label">Risk Calculator</span>
+						</a>
+					</li>
+					<li class="menu--item">
+						<a href="{% url 'members_portal:all_topics' %}" class="menu--link" title="">
+						  <i class="uil uil-comment-alt-question menu--icon"></i>
+						  <span class="menu--label">Discussion Forum</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="left_footer">
+				<ul>
+					<li><a href="{% url 'authentication:home' %}">Home</a></li>
+						<li><a href="{% url 'authentication:plans' %}"> Subscription Plans</a></li>
+					
+				</ul>
+				<div class="left_footer_content">
+					<p> © 2020 <strong>KXT 'DEMY</strong>. All Rights Reserved. <br>Developed by <strong><a href=""> 247 Digital Builders</a></strong></p>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	{% elif package is 3 %}
+	<nav class="vertical_nav">
+		<div class="left_section menu_left" id="js-menu" >
+			<div class="left_section">
+				<ul>
+					<li class="menu--item">
+						<a href="{% url 'members_portal:signals' %}" class="menu--link" title="Saved Courses">
+						  <i class="uil uil-signal-alt-3 menu--icon"></i>
+						  <span class="menu--label">Signals</span>
+						</a>
+					</li>
+					<li class="menu--item menu--item__has_sub_menu">
+						<label class="menu--link" title="Categories">
+							<i class="uil uil-presentation-lines-alt menu--icon"></i>
+							<span class="menu--label">Signal Education</span>
+						</label>
+
+						<ul class="sub_menu">
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:all_signals' %}" class="sub_menu--link">All Signals Education</a>
+							</li>
+
+							<li class="sub_menu--item">
+								<a href="{% url 'members_portal:favorite_signals' %}" class="sub_menu--link">Favorite Signal Education</a>
+							</li>
+						</ul>
+					</li>
+					<li class="menu--item">
+						<a href="{% url 'members_portal:risk_calculator' %}" class="menu--link" title="Notifications">
+						  <i class='uil uil-bell menu--icon'></i>
+						  <span class="menu--label">Risk Calculator</span>
+						</a>
+					</li>
+					<li class="menu--item">
+						<a href="{% url 'members_portal:all_topics' %}" class="menu--link" title="">
+						  <i class="uil uil-comment-alt-question menu--icon"></i>
+						  <span class="menu--label">Discussion Forum</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="left_footer">
+				<ul>
+					<li><a href="{% url 'authentication:home' %}">Home</a></li>
+						<li><a href="{% url 'authentication:plans' %}"> Subscription Plans</a></li>
+					
+				</ul>
+				<div class="left_footer_content">
+					<p> © 2020 <strong>KXT 'DEMY</strong>. All Rights Reserved. <br>Developed by <strong><a href=""> 247 Digital Builders</a></strong></p>
+				</div>
+			</div>
+		</div>
+	</nav>
+	{% endif %}
+	<!-- Left Sidebar End -->
+        {% block content %}
+  		{% endblock %}
+
+
+        <footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="footer_bottm">
+							<div class="row">
+								<div class="col-md-6">
+									<ul class="fotb_left">
+										<li>
+											<a href="index.html">
+												<div class="footer_logo">
+													<img src="images/favicon2.png" alt="">
+												</div>
+											</a>
+										</li>
+										<li>
+											<p>© 2020 <strong>KXT 'DEMY</strong>. All Rights Reserved.</p>
+										</li>
+									</ul>
+								</div>
+								<div class="col-md-6">
+									<div class="edu_social_links">
+										<a href="#"><i class="fab fa-facebook-f"></i></a>
+										<a href="#"><i class="fab fa-twitter"></i></a>
+										<a href="#"><i class="fab fa-instagram"></i></a>
+										<a href="#"><i class="fab fa-youtube"></i></a>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+    </div>
+
+	<script src="{% static 'js/vertical-responsive-menu.min.js' %}"></script>
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'vendor/OwlCarousel/owl.carousel.js' %}"></script>
+	<script src="{% static 'vendor/semantic/semantic.min.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+	<script src="{% static 'js/night-mode.js' %}"></script>
+	<script src="{% static 'js/jquery-steps.min.js' %}"></script>
+	<script>
+		$('#add-course-tab').steps({
+		  onFinish: function () {
+			//alert('Wizard Completed');
+			document.getElementById('courseSubmit').submit();
+		  }
+		});	
+		
+
+	</script>
+	 
+	</html>

@@ -1,0 +1,301 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container">			
+				<div class="row">
+					<div class="col-lg-12">	
+						<h2 class="st_title"><i class="uil uil-analysis"></i> Create New Course</h2>
+					</div>					
+				</div>				
+				<div class="row">
+					<div class="col-12">
+						<div class="course_tabs_1">
+							<div id="add-course-tab" class="step-app">
+								<ul class="step-steps">
+									<li class="active">
+										<a href="#tab_step1">
+											<span class="number"></span>
+											<span class="step-name">General Information</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step2">
+											<span class="number"></span>
+											<span class="step-name">Course Content</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step3">
+											<span class="number"></span>
+											<span class="step-name">Content Size</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step4">
+											<span class="number"></span>
+											<span class="step-name">Extra Information</span>
+										</a>
+									</li>
+								</ul>
+								<div class="step-content">
+									<div class="step-tab-panel step-tab-info active" id="tab_step1"> 
+										<div class="tab-from-content">
+											<div class="title-icon">
+												<h3 class="title"><i class="uil uil-info-circle"></i>General Information</h3>
+											</div>
+											{% include 'registration/messages.html' %}
+											<form method="POST" id="courseSubmit" action="" name="courseSubmit" enctype="multipart/form-data">
+
+												{% if form.errors %}
+							<div id="errors">
+								<div class="inner">
+									<p>There were some errors in the information you entered. Please correct the following:</p>
+									<ul>
+										{% for field in form %}
+											{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+							<!-- /Error messaging -->
+						{% endif %}
+
+												{% csrf_token %}
+												<div class="course__form">
+													<div class="general_info10">
+														<div class="row">
+															<div class="col-lg-6 col-md-6">															
+																<div class="ui search focus mt-30 lbel25">
+																	<label>Course Title*</label>
+																	<div class="ui left icon input swdh19">
+																		<input class="prompt srch_explore" type="text" placeholder="Insert your course title." name="title" data-purpose="edit-course-title" maxlength="60" id="main[title]" value="{{update_data.title}}">															
+																		<div class="badge_num">60</div>
+																	</div>
+																</div>									
+															</div>
+															<div class="col-lg-6 col-md-6">															
+																<div class="ui search focus mt-30 lbel25">
+																	<label>Course Subtitle*</label>
+																	<div class="ui left icon input swdh19">
+																		<input class="prompt srch_explore" type="text" placeholder="Insert your course Subtitle." name="subtitle" data-purpose="edit-course-title" maxlength="60" id="sub[title]" value="{{update_data.subtitle}}">															
+																		<div class="badge_num2">120</div>
+																	</div>
+																</div>									
+															</div>
+															<div class="col-lg-12 col-md-12">
+																<div class="course_des_textarea mt-30 lbel25">
+																	<label>Course Description*</label>
+																	<div class="course_des_bg">
+																		<ul class="course_des_ttle">
+																			<li><a href="#"><i class="uil uil-bold"></i></a></li>
+																			<li><a href="#"><i class="uil uil-italic"></i></a></li>
+																			<li><a href="#"><i class="uil uil-list-ul"></i></a></li>
+																			<li><a href="#"><i class="uil uil-left-to-right-text-direction"></i></a></li>
+																			<li><a href="#"><i class="uil uil-right-to-left-text-direction"></i></a></li>
+																			<li><a href="#"><i class="uil uil-list-ui-alt"></i></a></li>
+																			<li><a href="#"><i class="uil uil-link"></i></a></li>
+																			<li><a href="#"><i class="uil uil-text-size"></i></a></li>
+																			<li><a href="#"><i class="uil uil-text"></i></a></li>
+																		</ul>
+																		<div class="textarea_dt">															
+																			<div class="ui form swdh339">
+																				<div class="field">
+																					<textarea rows="5" name="description" id="id_course_description" placeholder="Insert your course description" value="{{update_data.}}"></textarea>
+																				</div>
+																			</div>										
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-lg-4 col-md-12">
+																<div class="mt-30 lbel25">
+																	<label>Membership*</label>
+																</div>
+																<select class="ui hj145 dropdown cntry152 prompt srch_explore" name="membership">
+																	<option value="">Select Member</option>
+																	<option value="vip">VIP</option>
+																	<option value="signal">Signal</option>
+																	<option value="vip & regular">Vip & Regular</option>
+																	<option value="all members">All Members</option>
+																
+																</select>
+															</div>
+															<div class="col-lg-4 col-md-6">
+																<div class="mt-30 lbel25">
+																	<label>Course Category*</label>
+																</div>
+																<select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category">
+																	<option value="">Select Category</option>
+																	<option value="video">Video</option>
+																	<option value="audio">Audio</option>
+																	<option value="ebook"> Ebook </option>
+																	<option value="signal education"> Signal Education </option>
+																</select>
+															</div>
+																											
+														</div>
+													</div>
+												
+												</div>
+										
+										</div>
+									</div>
+									
+									<div class="step-tab-panel step-tab-gallery" id="tab_step2">
+										<div class="tab-from-content">
+											<div class="title-icon">
+												<h3 class="title"><i class="uil uil-image-upload"></i>View</h3>
+											</div>
+											<div class="course__form">
+												<div class="view_info10">
+													<div class="row">
+														<div class="col-lg-12">	
+															<div class="view_all_dt">	
+																<div class="view_img_left">	
+																	<div class="view__img">	
+																		<img src="{% static 'images/courses/add_img.jpg' %}" alt="">
+																	</div>
+																</div>
+																<div class="view_img_right">	
+																	<h4>Cover Image</h4>
+																	<p>Upload your course image here. It must meet our course image quality standards to be accepted. Important guidelines: 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.</p>
+																	<div class="upload__input">
+																		<div class="input-group">
+																			<div class="custom-file">
+																				<input type="file" class="custom-file-input" id="inputGroupFile04" value="{{update_data.cover_img}}" name="cover_img">
+																				<label class="custom-file-label" for="inputGroupFile04">No Choose file</label>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="view_all_dt">	
+																<div class="view_img_left">	
+																	<div class="view__img">	
+																		<img src="{% static 'images/courses/add_video.jpg' %}" alt="">
+																	</div>
+																</div>
+																<div class="view_img_right">	
+																	<h4>Upload Video/File/Audio </h4>
+																	<p></p>
+																	<div class="upload__input">
+																		<div class="input-group">
+																			<div class="custom-file">
+																				<input type="file" class="custom-file-input" id="inputGroupFile05" name="material" value="{{update_data.material}}">
+																				<label class="custom-file-label" for="inputGroupFile05">No Choose file</label>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									 <div class="step-tab-panel step-tab-location" id="tab_step3">
+										<div class="tab-from-content">
+											<div class="title-icon">
+												<h3 class="title"><i class="uil uil-film"></i>Course Content</h3>
+											</div>
+											<div class="course__form">
+												<div class="row">
+													<div class="col-lg-12">		
+														<div class="extra_info">		
+															<h4 class="part__title">New Course Content</h4>
+														</div>
+														<div class="view_info10">
+															<div class="row">
+																
+																<div class="col-lg-12 col-md-12">	
+																	<div class="lecture_title">
+																		<h4>Add Content</h4>
+																	</div>
+																</div>
+															
+																<div class="col-lg-5 col-md-6">															
+																	<div class="ui search focus mt-30 lbel25">
+																		<label>Volume*</label>
+																		<div class="ui left icon input swdh19 swdh95">
+																			<input class="prompt srch_explore" type="number" min="0" name="volume" required="" value="{{update_data.volume}}" placeholder="0">															
+																			<div class="badge_mb">MB</div>
+																		</div>
+																	</div>									
+																</div>
+																<div class="col-lg-5 col-md-6">															
+																	<div class="ui search focus mt-30 lbel25">
+																		<label>Duration*</label>
+																		<div class="ui left icon input swdh19 swdh55">
+																			<input class="prompt srch_explore" type="number" min="0" name="duration" value="{{update_data.duration}}" required="" placeholder="0">															
+																			<div class="badge_min">Minutes</div>
+																		</div>
+																	</div>									
+																</div>
+																
+																<div class="col-lg-12 col-md-12">
+																	<div class="save_content">
+																		<button class="save_content_btn" type="">Save Course Content</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+									
+										 </div>
+									</div>
+									
+									 <div class="step-tab-panel step-tab-amenities" id="tab_step4"> 
+										<div class="tab-from-content">
+											<div class="title-icon">
+												<h3 class="title"><i class="uil uil-file-copy-alt"></i>Status</h3>
+											</div>
+										   <div class="course__form">
+												<div class="row">
+														<div class="col-lg-12">		
+														<div class="extra_info">		
+															<h4 class="part__title">Status</h4>
+														</div>
+														<div class="view_info10">
+															<div class="row">
+																<div class="col-lg-12 col-md-12">
+																	<div class="mt-30 lbel25">
+																		<label>Status*</label>
+																	</div>
+																	<select class="ui hj145 dropdown cntry152 prompt srch_explore" name="status">
+																		<option value="">Select Status</option>
+																		<option value="pending">Pending</option>
+																		<option value="publish">Publish</option>
+																		<option value="save">Save</option>
+																	
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										 </div>
+									</div> 
+								   
+								</div>
+								<div class="step-footer step-tab-pager">
+									<button data-direction="prev" class="btn btn-default steps_btn">PREVIOUS</button>
+									<button data-direction="next" class="btn btn-default steps_btn">Next</button>
+									<button data-direction="finish" type="submit" class="btn btn-default steps_btn">Submit </button>
+								</div>
+								<br><br>
+							</div>
+						</form>
+                        </div>
+                    </div>	
+{% endblock %}

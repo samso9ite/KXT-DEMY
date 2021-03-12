@@ -1,0 +1,246 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-xl-9 col-lg-8">
+						<div class="section3125">
+							{% include 'marque_info.html' %}
+							<h4 class="item_title">Approved Members</h4>
+							<a href="{% url 'members_portal:all_members' %}" class="see150">See all</a>
+						
+							<div class="la5lo1">
+								<div class="owl-carousel live_stream owl-theme">
+									{% for each_member in all_members %}
+										<div class="item">
+											<div class="stream_1">
+												{% if each_member.profile_img %}
+													<a href="" class="stream_bg">
+														<img src="{{each_member.profile_img.url}}" alt="">
+														<h4>{{each_member.User.username}}</h4>
+													
+													</a>
+												{% else %}
+													<a href="live_output.html" class="stream_bg">
+														<img src="{%  static 'images/left-imgs/img-1.jpg'  %}" alt="">
+														<h4>{{each_member.User.username}}</h4>
+													
+													</a>
+												{% endif %}
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						
+						</div>
+						<div class="section3125 mt-50">
+							<h4 class="item_title">Newest Videos</h4>
+							<a href="{% url 'members_portal:all_videos' %}" class="see150">See all</a>
+							<div class="la5lo1">
+								<div class="owl-carousel featured_courses owl-theme">
+									{% for vid in all_vid %}
+										<div class="item">
+											<div class="fcrse_1 mb-20">
+												<a href="{% url 'members_portal:course_detail' id=vid.id %}" class="fcrse_img">
+													{% if vid.cover_img %}
+														<img src="{{vid.cover_img.url}}" height="190" alt="">
+													{% else %}
+														<img src="{%  static 'images/courses/img-1.jpg' %}"  alt="">
+													{% endif %}
+													<div class="course-overlay">
+														<div class="badge_seller">Bestseller</div>
+														<span class="play_btn1"><i class="uil uil-play"></i></span>
+														<div class="crse_timer">
+														{{vid.duration}}
+														</div>
+													</div>
+												</a>
+												<div class="fcrse_content">
+													<div class="eps_dots more_dropdown">
+														<a href="#"><i class='uil uil-ellipsis-v'></i></a>
+														<div class="dropdown-content">
+															<span><i class="uil uil-heart"></i>Save</span>
+														</div>																										
+													</div>
+													<div class="vdtodt">
+														<span class="vdt14">{{vid.date_created|naturaltime}}</span>
+													</div>
+													<a href="{% url 'members_portal:course_detail' id=vid.id %}" class="crse14s">{{vid.title}}</a>
+													<a href="#" class="crse-cate">{{vid.membership|title}}</a>
+													
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+									
+								</div>
+							</div>
+						</div>
+						<div class="section3125 mt-30">
+							<h4 class="item_title">Newest Audios</h4>
+							<a href="{% url 'members_portal:all_audios' %}" class="see150">See all</a>
+							<div class="la5lo1">
+								<div class="owl-carousel featured_courses owl-theme">
+									{% for audio in all_audio %}
+									<div class="item">
+										<div class="fcrse_1 mb-20">
+											<a href="{% url 'members_portal:course_detail' id=audio.id %}" class="fcrse_img">
+												{% if audio.cover_img %}
+													<img src="{{audio.cover_img.url}}" height="190" alt="">
+												{% else %}
+													<img src="{%  static 'images/courses/img-1.jpg' %}"  alt="">
+												{% endif %}
+												<div class="course-overlay">
+													<div class="badge_seller">Bestseller</div>
+													<span class="play_btn1"><i class="uil uil-play"></i></span>
+													<div class="crse_timer">
+														{{audio.duration}}
+													</div>
+												</div>
+											</a>
+											<div class="fcrse_content">
+												<div class="eps_dots more_dropdown">
+													<a href="#"><i class='uil uil-ellipsis-v'></i></a>
+													<div class="dropdown-content">
+														<span><i class="uil uil-heart"></i>Save</span>
+													</div>																										
+												</div>
+												<div class="vdtodt">
+													<span class="vdt14">{{audio.date_created|naturaltime}}</span>
+												</div>
+												<a href="course_detail_view.html" class="crse14s">{{audio.title}}</a>
+												<a href="#" class="crse-cate">{{audio.membership|title}}</a>
+												
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<div class="col-xl-3 col-lg-4">
+						<div class="right_side">
+							<div class="fcrse_2 mb-30">
+								<div class="tutor_img">
+									<a href="my_instructor_profile_view.html"><img src="{%  static 'images/keeks.jpeg' %}" alt=""></a>												
+								</div>
+								<div class="tutor_content_dt">
+									<div class="tutor150">
+										<a href="my_instructor_profile_view.html" class="tutor_name">Moses Olabode</a>
+										<!-- <div class="mef78" title="Verify">
+											<i class="uil uil-check-circle" style="color: #199c10;"></i>
+										</div> -->
+									</div>
+									<div class="tutor_cate">Instructor</div>
+									<div class="tutor_cate">Forex Trading Expert, Top internet marketer</div>
+									<ul class="tutor_social_links">
+										<li><a href="#" class="fb"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a href="#" class="tw"><i class="fab fa-twitter"></i></a></li>
+										<li><a href="#" class="ln"><i class="fab fa-linkedin-in"></i></a></li>
+										<li><a href="#" class="yu"><i class="fab fa-youtube"></i></a></li>
+									</ul>
+									
+									<a href="my_instructor_profile_view.html" class="prfle12link">Go To Profile</a>
+								</div> 
+							</div>
+							
+							<div class="get1452">
+								<h4>Get personalized recommendations</h4>
+								<p>Ask the instructor for personal trading tips.</p>
+								<button class="Get_btn" onclick="window.location.href = '#';">Get Started</button>
+							</div>
+					
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12">
+						<div class="section3125 mt-30">
+							<h4 class="item_title">What Our Student Have To Say</h4>
+							<div class="la5lo1">
+								<div class="owl-carousel Student_says owl-theme">
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>""For that signal, i'm so happy, even though i miss signals i still wait for others, and this has helped build my discipline. As i have been accostumed to boom and crash movement. I really appreciate "</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-4.jpg'  %}" alt="">												
+												</div>
+												<h4>Steve</h4>
+											</div>											
+										</div>
+									</div>
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>"<strong>KXT 'DEMY  tutorials very good, his price actions videos are so explanatory and practical based, he teaches very good and also his predictions on the next price actions most times are most times correct, i will advice you to join his academy. "</strong>"</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-1.jpg'  %}" alt="">												
+												</div>
+												<h4>Mary Suleiman</h4>
+											</div>											
+										</div>
+									</div>
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>"His strategy has actually been working for me, i analyse the market professionally now. i don't beleive getting to this level of professionalism in trading, he taught a lot about risk management which has really helped me in managing risk."</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-7.jpg'  %}" alt="">												
+												</div>
+												<h4>Jones </h4>
+											</div>											
+										</div>
+									</div>
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>"I am a proud of member of KXT 'DEMY'  because since i join the academy i have been able to blow up my account, with just a single trade i was able to double my account thanks to his winning strategy."</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-6.jpg'  %}" alt="">												
+												</div>
+												<h4> Ife</h4>
+											</div>											
+										</div>
+									</div>
+									<div class="item">
+										<div class="fcrse_4 mb-20">
+											<div class="say_content">
+												<p>"Curabitur placerat justo ac mauris condimentum ultricies. In magna tellus, eleifend et volutpat id, sagittis vitae est.  Pellentesque vitae laoreet tortor."</p>
+											</div>
+											<div class="st_group">
+												<div class="stud_img">
+													<img src="{%  static 'images/left-imgs/img-3.jpg'  %} " alt="">												
+												</div>
+												<h4>Davinder Singh</h4>
+											</div>											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
+	<!-- Body End -->
+
+{% endblock %}

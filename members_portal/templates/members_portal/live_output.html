@@ -1,0 +1,103 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-xl-12 col-lg-12">
+						<div class="section3125">
+							{% include 'registration/messages.html' %}
+							<div class="fcrse_1 mt-30">
+								{% if audio_content.category == "ebook" %}
+									<img src="{{audio_content.cover_img.url}}" width="100%" height="50%" alt="">
+									<a href="{{audio_content.material.url}}">
+										<button data-direction="finish" type="submit" class="btn btn-default steps_btn">Read Material</button>
+									</a>
+								{% elif audio_content.category == "video" or "signal education"  %}
+
+								
+
+									<video width="100%" height="40%" controls autoplay>
+										<source src="{{audio_content.material.url}}" type="video/mp4"> </source>
+									</video>
+
+								{% elif  audio_content.category == "audio" %}
+								<video controls poster="{{profile_img}}">
+									<source src="{{audio_content.material.url}}" type= 'audio/mp3'>
+								</video>
+								{% endif %}
+									<!-- <div class="course-overlay">
+										
+										<span class="play_btn1"><i class="uil uil-play"></i></span>
+										
+									</div> -->
+								
+								<div class="fcrse_content">
+									<div class="eps_dots more_dropdown">
+										<a href="#"><i class="uil uil-ellipsis-v"></i></a>
+										<div class="dropdown-content">
+											<div class="_215b10" style="margin-top: 3%;">	
+												{% if audio_content.id in checked_result %}
+													<a href="{% url 'members_portal:save_course' audio_content.id %}">	
+														<span><i class="uil uil-heart"></i><strong>Remove from favorite </strong></span>
+													</a>
+												{% else %}
+													<a href="{% url 'members_portal:save_course' audio_content.id %}">	
+														<span><i class="uil uil-heart"></i><strong> Save as favorite </strong> </span>
+													</a>
+												{% endif %} 
+		
+												
+											</div>
+										</div>																											
+									</div>
+									<div class="vdtodt">
+										<!-- <span class="vdt14">109k views</span> -->
+										<span class="vdt14">{{audio_content.date_created|naturaltime}}</span>
+									</div>
+									<a href="course_detail_view.html" class="crse14s"> {{audio_content.title|title}} </a>
+									<a href="#" class="crse-cate">{{audio_content.subtitle|title}}</a>
+									
+								</div>
+							</div>						
+							<div class="user_dt5">
+								<div class="user_dt_left">
+									<div class="live_user_dt">
+										
+										<div class="user_img5">
+											<br>
+											<img src="{% static 'images/keeks.jpeg' %}" alt="">												
+										</div>
+										<div class="user_cntnt">
+											<br>
+											<h4>Moses Olabode</h4>
+											<p>Instructor</p>
+										</div>
+									</div>
+								</div>
+								<div class="user_dt_right">
+									<br>
+									<!-- <ul>
+										<li>
+											<a href="#" class="lkcm152"><i class='uil uil-thumbs-up'></i><span>100</span></a>
+										</li>
+										<li>
+											<a href="#" class="lkcm152"><i class='uil uil-thumbs-down'></i><span>20</span></a>
+										</li>
+									</ul> -->
+								</div>
+							</div>
+						</div>							
+					</div>
+								
+				</div>
+			</div>
+		</div>
+
+
+{% endblock %}

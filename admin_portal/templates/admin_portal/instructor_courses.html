@@ -1,0 +1,165 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-lg-12">	
+						<h2 class="st_title"><i class="uil uil-book-alt"></i>Courses</h2>
+					</div>			
+					<div class="col-md-12">
+						<div class="card_dash1">
+							<div class="card_dash_left1">
+								<i class="uil uil-book-alt"></i>
+								<h1>Jump Into Course Creation</h1>
+							</div>
+							<div class="card_dash_right1">
+								<a href="{% url 'admin_portal:create_course' %}"> <button class="create_btn_dash">Create Your Course</button> </a>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="my_courses_tabs">
+							<ul class="nav nav-pills my_crse_nav" id="pills-tab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" href="{% url 'admin_portal:video_list' %}" role="tab" ><i class="uil uil-presentation-play"></i>Videos</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="{% url 'admin_portal:audio_list' %}" role="tab"><i class="uil uil-megaphone"></i>Audios</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link"   href="{% url 'admin_portal:ebook_list' %}"><i class="uil uil-book-alt"></i>Ebooks</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="{% url 'admin_portal:signals_list' %}" role="tab"><i class="uil uil-signal-alt-3"></i>Signal Education</a>
+								</li>
+								
+							</ul>
+							<div class="tab-content" id="pills-tabContent">
+								{% include 'registration/messages.html' %}
+								<div class="table-responsive mt-30">
+										<table class="table ucp-table">
+											<thead class="thead-s">
+												<tr>
+													<!-- <th class="text-center" scope="col">Item No.</th> -->
+													<th>Title</th>
+													<th class="text-center" scope="col">Members</th>
+													<th class="text-center" scope="col">Duration</th>
+													<th class="text-center" scope="col">Status</th>
+													<th class="text-center" scope="col"> Publish Date</th>
+													<th class="text-center" scope="col">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% if '/video_course' in request.path %}
+													{% for video_content in video_list %}
+														<tr>
+															<!-- <td class="text-center">IT-001</td> -->
+															<td>{{video_content.title}}</td>
+															<td class="text-center">{{video_content.membership}}</td>
+															<td class="text-center"><b class="course_active">{{video_content.duration}}</b></td>
+															<td class="text-center"><b class="course_active">{{video_content.status}}</b></td>
+															<td class="text-center"><b class="course_active">{{video_content.date_created}}</b></td>
+															<td class="text-center">
+																<a href="{% url 'admin_portal:update_course' video_content.id %}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
+																<a href="{% url 'admin_portal:delete_course' video_content.id %}" title="Delete" class="gray-s"><i class="uil uil-trash-alt"></i></a>
+																<a href="{% url 'admin_portal:course_details' video_content.id %}" title="View" class="gray-s"><i class="uil uil-eye"></i></a>
+																
+															</td>
+														</tr>
+													{% endfor %}
+
+												{% elif '/audio_course' in request.path %}
+													{% for audio_content in audio_list %}
+														<tr>
+															<!-- <td class="text-center">IT-001</td> -->
+															<td>{{audio_content.title}}</td>
+															<td class="text-center">{{audio_content.membership}}</td>
+															<td class="text-center"><b class="course_active">{{audio_content.duration}}</b></td>
+															<td class="text-center"><b class="course_active">{{audio_content.status}}</b></td>
+															<td class="text-center"><b class="course_active">{{audio_content.date_created}}</b></td>
+															<td class="text-center">
+																<a href="{% url 'admin_portal:update_course' audio_content.id %}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
+																<a href="{% url 'admin_portal:delete_course' audio_content.id %}" title="Delete" class="gray-s"><i class="uil uil-trash-alt"></i></a>
+																<a href="{% url 'admin_portal:course_details' audio_content.id %}" title="View" class="gray-s"><i class="uil uil-eye"></i></a>
+															
+															</td>
+														</tr>
+													{% endfor %}
+
+												{% elif '/ebook_course' in request.path %}
+													{% for ebook_content in ebook_list %}
+														<tr>
+															<!-- <td class="text-center">IT-001</td> -->
+															<td>{{ebook_content.title}}</td>
+															<td class="text-center">{{ebook_content.membership}}</td>
+															<td class="text-center"><b class="course_active">{{ebook_content.duration}}</b></td>
+															<td class="text-center"><b class="course_active">{{ebook_content.status}}</b></td>
+															<td class="text-center"><b class="course_active">{{ebook_content.date_created}}</b></td>
+															<td class="text-center">
+																<a href="{% url 'admin_portal:update_course' ebook_content.id %}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
+																<a href="{% url 'admin_portal:delete_course' ebook_content.id %}" title="Delete" class="gray-s"><i class="uil uil-trash-alt"></i></a>
+																<a href="{% url 'admin_portal:course_details' ebook_content.id %}" title="View" class="gray-s"><i class="uil uil-eye"></i></a>
+															</td>
+														</tr>
+													{% endfor %}
+
+													{% elif '/signal_materials' in request.path %}
+														{% for signal_content in signals_list %}
+															<tr>
+																<!-- <td class="text-center">IT-001</td> -->
+																<td>{{signal_content.title}}</td>
+																<td class="text-center">{{signal_content.membership}}</td>
+																<td class="text-center"><b class="course_active">{{signal_content.duration}}</b></td>
+																<td class="text-center"><b class="course_active">{{signal_content.status}}</b></td>
+																<td class="text-center"><b class="course_active">{{signal_content.date_created}}</b></td>
+																<td class="text-center">
+																	<a href="{% url 'admin_portal:update_course' signals_materials.id %}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
+																	<a href="{% url 'admin_portal:delete_course' signals_materials.id %}" title="Delete" class="gray-s"><i class="uil uil-trash-alt"></i></a>
+																	<a href="{% url 'admin_portal:course_details' signals_materials.id %}" title="View" class="gray-s"><i class="uil uil-eye"></i></a>
+																
+																</td>
+															</tr>
+														{% endfor %}
+
+													{% endif %}
+											</tbody>
+										</table>
+								<!-- Pagination -->
+								{% if is_paginated %}
+								<ul class="pagination  pagination-lg">
+								  {% if page_obj.has_previous %}
+									<li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+								  {% else %}
+									<li class="disabled"><span>&laquo;</span></li>
+								  {% endif %}
+								  {% for i in paginator.page_range %}
+									{% if page_obj.number == i %}
+									  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+									{% else %}
+									  <li><a href="?page={{ i }}">{{ i }}</a></li>
+									{% endif %}
+								  {% endfor %}
+								  {% if page_obj.has_next %}
+									<li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+								  {% else %}
+									<li class="disabled"><span>&raquo;</span></li>
+								  {% endif %}
+								</ul>
+							  {% endif %}
+									</div>
+					
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

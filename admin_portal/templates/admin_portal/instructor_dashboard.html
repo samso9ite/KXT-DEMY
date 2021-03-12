@@ -1,0 +1,188 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+	<!-- Header End -->
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-lg-12">	
+						<h2 class="st_title"><i class="uil uil-apps"></i> Instructor Dashboard</h2>
+					</div>
+					<div class="col-xl-3 col-lg-6 col-md-6">
+						<!-- <a href="{% url ''}" -->
+						<div class="card_dash">
+							<div class="card_dash_left">
+								<h5>Total Audios</h5>
+								<h2>{{total_audios}}</h2>
+								<span class="crdbg_1">New </span>
+							</div>
+							<div class="card_dash_right">
+								<img src="{%  static 'images/dashboard/achievement.svg' %}" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-6 col-md-6">
+						<div class="card_dash">
+							<div class="card_dash_left">
+								<h5>Total Videos</h5>
+								<h2>{{total_videos}}</h2>
+								<span class="crdbg_2">New 125</span>
+							</div>
+							<div class="card_dash_right">
+								<img src="{%  static 'images/dashboard/graduation-cap.svg' %}" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-6 col-md-6">
+						<div class="card_dash">
+							<div class="card_dash_left">
+								<h5>Total Ebooks</h5>
+								<h2>{{total_ebooks}}</h2>
+								<span class="crdbg_3">New 5</span>
+							</div>
+							<div class="card_dash_right">
+								<img src="{%  static 'images/dashboard/online-course.svg' %}" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-6 col-md-6">
+						<div class="card_dash">
+							<div class="card_dash_left">
+								<h5>Total Students</h5>
+								<h2>{{total_members}}</h2>
+								<span class="crdbg_4">New 245</span>
+							</div>
+							<div class="card_dash_right">
+								<img src="{%  static 'images/dashboard/knowledge.svg' %}" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="card_dash1">
+							<div class="card_dash_left1">
+								<i class="uil uil-book-alt"></i>
+								<h1>Jump Into Course Creation</h1>
+							</div>
+							<div class="card_dash_right1">
+								<a href="{% url 'admin_portal:create_course' %}"><button class="create_btn_dash">Create Your Course</button></a>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<div class="row" style="margin-bottom: 3%;">
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<div class="section3125 mt-50">
+							<h4 class="item_title">Videos</h4>
+							<div class="la5lo1">
+								<div class="owl-carousel featured_courses owl-theme">
+									{% for video in videos %}
+										<div class="item">
+											<div class="fcrse_1">
+												<a href="#" class="fcrse_img">
+													<img src="{{video.cover_img.url}}" alt="">
+													<div class="course-overlay"></div>
+												</a>
+												<div class="fcrse_content">
+													<div class="vdtodt">
+														<span class="vdt14">{{video.date_created|naturaltime}}</span>
+													</div>
+													<a href="{% url 'admin_portal:course_details' id=video.id %}" class="crsedt145">{{video.title|truncatechars:24}}</a>
+												
+													<!-- <div class="allvperf">
+														<div class="crse-perf-left">Total Like</div>
+														<div class="crse-perf-right">150</div>
+													</div>
+													<div class="allvperf">
+														<div class="crse-perf-left">Total Dislike</div>
+														<div class="crse-perf-right">1k</div>
+													</div> -->
+													
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+																
+								</div>
+							</div>
+						</div>
+					</div>					
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<div class="section3125 mt-50">
+							<h4 class="item_title">Audios</h4>
+							<div class="la5lo1">
+								<div class="owl-carousel featured_courses owl-theme">
+									{% for audio in audios %}
+										<div class="item">
+											<div class="fcrse_1">
+												<a href="#" class="fcrse_img">
+													<img src="{{audio.cover_img.url}}" alt="">
+													<div class="course-overlay"></div>
+												</a>
+												<div class="fcrse_content">
+													<div class="vdtodt">
+														<span class="vdt14">{{audio.date_created|naturaltime}} </span>
+													</div>
+													<a href="#" class="crse14s">{{audio.title|truncatechars:24}} </a>
+													
+													<!-- <div class="allvperf">
+														<div class="crse-perf-left">Total Like</div>
+														<div class="crse-perf-right">25</div>
+													</div>
+													<div class="allvperf">
+														<div class="crse-perf-left">Total Dislike</div>
+														<div class="crse-perf-right">15k</div>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+									
+								</div>
+							</div>
+						</div>						
+					</div>
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<div class="section3125 mt-50">
+							<h4 class="item_title">Ebooks</h4>
+							<div class="la5lo1">
+								<div class="owl-carousel featured_courses owl-theme">
+									{% for ebook in ebooks %}
+									<div class="item">
+										<div class="fcrse_1">
+											<a href="#" class="fcrse_img">
+												<img src="{{ebook.cover_img.url}}" alt="">
+												<div class="course-overlay"></div>
+											</a>
+											<div class="fcrse_content">
+												<div class="vdtodt">
+													<span class="vdt14">{{ebook.date_created|naturaltime}}</span>
+												</div>
+												<a href="#" class="crse14s">{{ebook.title|truncatechars:24}}</a>
+												
+												<!-- <div class="allvperf">
+													<div class="crse-perf-left">Total Like</div>
+													<div class="crse-perf-right">25</div>
+												</div>
+												<div class="allvperf">
+													<div class="crse-perf-left">Total Dislike</div>
+													<div class="crse-perf-right">15k</div>
+												</div> -->
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+								
+								</div>
+							</div>
+						</div>
+						</div>
+						
+					</div>
+					</div>
+			</div>
+{% endblock %}

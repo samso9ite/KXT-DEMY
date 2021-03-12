@@ -1,0 +1,133 @@
+{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container">			
+				<div class="row">
+					<div class="col-lg-12">	
+						<h2 class="st_title"><i class="uil uil-analysis"></i> Create New Market </h2>
+						{% include 'registration/messages.html' %}
+								
+					</div>	
+
+				</div>				
+				<div class="row">
+					<div class="col-12">
+						<div class="step-tab-panel step-tab-location" id="tab_step3">
+							<div class="tab-from-content">
+								<form method="POST">
+												
+								<div class="course__form">
+									<div class="row">
+										<div class="col-lg-12">		
+											<div class="extra_info">		
+												<h4 class="part__title">Fill in All Details</h4>
+											</div>
+											{% if form.errors %}
+							<div id="errors">
+								<div class="inner">
+									<p>There were some errors in the information you entered. Please correct the following:</p>
+									<ul>
+										{% for field in form %}
+											{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+										{% endfor %}
+										{% endif %}
+											<div class="view_info10">
+												<div class="row">
+														{% csrf_token %}
+													<div class="col-lg-6 col-md-6">
+														<div class="ui search focus mt-30 lbel25">
+															<label>Market Name*</label>
+															<div class="ui left icon input swdh19 swdh55">
+																<input class="prompt srch_explore stop_loss" type="text" name="market_name" required="" placeholder="Volatility 100">															
+																<div class="badge_min">Name</div>
+															</div>
+														</div>
+													</div>
+													
+													
+													<div class="col-lg-6 col-md-6">															
+														<div class="ui search focus mt-30 lbel25">
+															<label>Lot Size*</label>
+															<div class="ui left icon input swdh19 swdh95">
+																<input class="prompt srch_explore balance" type="text" min="0" name="lot_size" required="" placeholder="0">															
+																<div class="badge_min"> LotSize </div>
+															</div>
+														</div>									
+													</div>
+
+													<div class="col-lg-6 col-md-6">
+														<div class="ui search focus mt-30 lbel25">
+															<label>Points*</label>
+															<div class="ui left icon input swdh19 swdh55">
+																<input class="prompt srch_explore stop_loss" type="" name="points" required="" placeholder="400">															
+																<div class="badge_min">Points</div>
+															</div>
+														</div>
+													</div>
+													
+													
+													<div class="col-lg-6 col-md-6">															
+														<div class="ui search focus mt-30 lbel25">
+															<label>Lowest Risk Dollar*</label>
+															<div class="ui left icon input swdh19 swdh95">
+																<input class="prompt srch_explore balance" type="" min="0" name="lowest_risk_dollar" required="" placeholder="0">															
+																<div class="badge_min"> $ </div>
+															</div>
+														</div>									
+													</div>
+													
+													
+													<div class="col-lg-12 col-md-12">
+														<div class="row save_content">
+														<!-- <h3 style="padding-left: 1%;"><center>Result</center></h3> -->
+													</div>
+													<div class="row">
+														<div class="col-lg-12 col-md-12">															
+															<div class="ui search focus mt-30 lbel25">
+																<div class="ui left icon input swdh19 swdh55" style="margin-top: 6%;">
+																	<button class="save_content_btn" onclick="compute()" style="width:100%" type="Submit">Create Market </button>
+																</div>
+															</div>									
+														</div>
+														
+														
+													</div>
+												</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+						
+							 </div>
+						</div>
+						
+                    </div>
+				</div>
+			</div>
+        </div>
+        <br>
+		<br>
+		
+
+		<script>
+			const stop_loss = document.querySelector('.stop_loss').value
+			const account_balance = document.querySelector('.balance').value
+			const percentage_risk = document.querySelector('.percentage_risk').value
+			const lot_size = document.querySelector('.lot_size')
+			const amount_result = document.querySelector('.amount_result')
+
+			function compute(){
+				console.log("Is this working");
+				result = stop_loss + account_balance;
+				amount_result.innerHTML = result;
+				console.log(result);
+			}
+		</script>
+		{% endblock %}

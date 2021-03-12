@@ -1,0 +1,68 @@
+﻿{% extends 'registration/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+
+	<!-- Signup Start -->
+	<div class="sign_in_up_bg">
+		<div class="container">
+			<div class="row justify-content-lg-center justify-content-md-center">
+				<div class="col-lg-12">
+					<div class="main_logo25" id="logo">
+						<a href="index.html"><img src="{% static 'images/main_logo.png' %}" alt=""></a>
+						<a href="index.html"><img class="logo-inverse" src="{% static 'images/main_logo2.png' %}" alt=""></a>
+					</div>
+				</div>
+			
+				<div class="col-lg-6 col-md-8">
+					<div class="sign_form">
+						<h2>Welcome Back</h2>
+						<p>Log In to Your Account!</p>
+					<form method="POST">
+								{% csrf_token %}
+								<!-- Error messaging -->
+						{% if form.errors %}
+							<div id="errors">
+								<div class="inner">
+									<p>There were some errors in the information you entered. Please correct the following:</p>
+									<ul>
+										{% for field in form %}
+											{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+							<!-- /Error messaging -->
+						{% endif %}
+						{% include 'registration/messages.html' %}
+							<div class="ui search focus mt-15">
+								<div class="ui left icon input swdh95">
+									<input class="prompt srch_explore" type="text" name="username" value="" id="" required="" maxlength="64" placeholder="Username">															
+									<i class="uil uil-user icon icon2"></i>
+								</div>
+							</div>
+							<div class="ui search focus mt-15">
+								<div class="ui left icon input swdh95">
+									<input class="prompt srch_explore" type="password" name="password" value="" id="id_password" required="" maxlength="64" placeholder="Password">
+									<i class="uil uil-key-skeleton-alt icon icon2"></i>
+								</div>
+							</div>
+							<div class="ui form mt-30 checkbox_sign">
+								<div class="inline field">
+									<div class="ui checkbox mncheck">
+										<input type="checkbox" tabindex="0" class="hidden">
+										<label>Remember Me</label>
+									</div>
+								</div>
+							</div>
+							<button class="login-btn" type="submit">Sign In</button>
+						</form>
+						<p class="sgntrm145">Or <a href="{% url 'authentication:forgot_pwd' %}">Forgot Password</a>.</p>
+						<p class="mb-0 mt-30 hvsng145">Don't have an account? <a href="{% url 'authentication:signup' %}">Sign Up</a></p>
+					</div>
+					<div class="sign_footer"><img src="" alt="">© 2020 <strong>KXT 'DEMY</strong>. All Rights Reserved.</div>
+				</div>				
+			</div>				
+		</div>				
+	</div>
+	{% endblock %}

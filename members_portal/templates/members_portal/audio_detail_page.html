@@ -1,0 +1,152 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Body Start -->
+	<div class="wrapper _bg4586">
+		<div class="_215b01">
+			<div class="container-fluid">		
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section3125">							
+							<div class="row justify-content-center">						
+								<div class="col-xl-4 col-lg-5 col-md-6">						
+									<div class="preview_video">
+														
+										<a href="{% url 'members_portal:live_output' audio_content.id  %}" class="fcrse_img" >
+											{% if audio_content.cover_img %}
+												<img src="{{audio_content.cover_img.url}}" height="200" alt="">
+											{% else %}
+												<img src="images/courses/img-2.jpg" alt="">
+											{% endif %}
+											<div class="course-overlay">
+												<div class="badge_seller">Most Rated</div>
+												<span class="play_btn1"><i class="uil uil-play"></i></span>
+												<!-- <span class="_215b02">Listen to Audio</span> -->
+											</div>
+										</a>
+									</div>
+									<div class="_215b10" style="margin-top: 3%;">										
+										{% if audio_content.id in checked_result %}
+											<a href="{% url 'members_portal:save_course' audio_content.id %}">	
+												<span><i class="uil uil-heart"></i><strong>Remove from favorite </strong></span>
+											</a>
+										{% else %}
+											<a href="{% url 'members_portal:save_course' audio_content.id %}">	
+												<span><i class="uil uil-heart"></i><strong> Save as favorite </strong> </span>
+											</a>
+										{% endif %} 
+
+										{% include 'registration/messages.html' %}
+									</div>
+								</div>
+								<div class="col-xl-8 col-lg-7 col-md-6">
+									<div class="_215b03">
+										<h2>{{audio_content.title|title}}</h2>
+										<span class="_215b04"> {{audio_content.subtitle}}</span>
+									</div>
+									
+									<div class="_215b05">										
+									 Uploaded at {{audio_content.date_created|naturaltime}}
+									</div>
+									
+								</div>							
+							</div>							
+						</div>							
+					</div>															
+				</div>
+			</div>
+		</div>
+		<div class="_215b15 _byt1458">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+					
+						<div class="course_tabs">
+							<nav>
+								<div class="nav nav-tabs tab_crse justify-content-center" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="true">About</a>
+									<a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Reviews</a>
+								</div>
+							</nav>						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="_215b17">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="course_tab_content">
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-about" role="tabpanel">
+									<div class="_htg451">
+									
+										<div class="_htgdrt ">
+											<h3>Material Description </h3>
+											<div class="_scd123">
+												<div class="row">
+													<div class="col-lg-10">
+														{{audio_content.description}}
+														
+													</div>
+													
+												</div>
+											</div>
+										</div>							
+									</div>							
+								</div>
+								
+								<div class="tab-pane fade" id="nav-reviews" role="tabpanel">
+									<div class="_htg451">
+									
+										<div class="_htgdrt">
+											<h3> All Reviews </h3>
+											<div class="_scd123">
+												<div class="row">
+													<div class="col-lg-12">
+													
+											<form method="POST" action="{% url 'members_portal:create_review' course_id=audio_content.id %}">
+												{% csrf_token %}
+												<!-- <div class="cmmnt_1526"> -->
+													<div class="cmnt_group">
+														<div class="img160">
+															<img src="{{profile_img}}" alt="">										
+														</div>
+														<textarea name="review" class="_cmnt001" placeholder="Add a public review"></textarea> 
+														<span style="float: right; padding-left: 5%; margin-top: -15px;">
+															 <button class="cmnt-btn" type="submit">Comment</button>
+														</span>
+													</div>
+													
+												</div>
+											</form>
+											{% for review in all_reviews %}
+													<div class="all_msg_bg" style="margin-top: 2%;">
+														<div class="channel_my item all__noti5">
+															<div class="profile_link">
+																<img src="{{profile_img}}" alt="">
+																<div class="pd_content">
+																	<h6>{{review.user|title}}</h6>
+																	<p class="noti__text5">{{review.review}}</p>
+																	<span class="nm_time">{{review.date_created|naturaltime}}</span>
+																</div>							
+															</div>							
+														</div>
+													</div>
+													{% endfor %}
+													<p class="rvds10"></p>
+											
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+	{% endblock %}

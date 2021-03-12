@@ -1,0 +1,89 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Left Sidebar End -->
+	<!-- Body Start -->
+	<div class="wrapper _bg4586">
+		<div class="_215b01">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section3125">							
+							<div class="row justify-content-center">						
+								<div class="col-xl-4 col-lg-5 col-md-6">						
+									<div class="preview_video">						
+										<a href="{% url 'admin_portal:live_output' id=course_data.id %}" class="fcrse_img" >
+											<img src="{{course_data.cover_img.url}}" alt="">
+											<div class="course-overlay">
+												<span class="play_btn1"><i class="uil uil-play"></i></span>
+												<span class="_215b02">Preview this course</span>
+											</div>
+										</a>
+									</div>
+								</div>
+								<div class="col-xl-8 col-lg-7 col-md-6">
+									<div class="_215b03">
+										<h2>{{course_data.title|title}}</h2>
+										<span class="_215b04">{{course_data.description|capfirst}}</span>
+									</div>
+									<div class="_215b05">
+										<div class="crse_reviews mr-2">
+											<i class="uil uil-star"></i>4.5
+										</div>
+									</div>
+									<div class="_215b05">										
+										Date Uploaded : {{course_data.date_created|naturaltime}}
+									</div>
+								</div>							
+							</div>							
+						</div>							
+					</div>															
+				</div>
+			</div>
+		</div>
+		<div class="_215b15 _byt1458">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="user_dt5">
+							<div class="user_dt_right">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="_215b17">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="course_tab_content">
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-about" role="tabpanel">
+									<div class="_htg451">
+										<div class="_htgdrt mt-35">
+											<h3>Course Description</h3>
+											<div class="_scd123">
+												<div class="row">
+													<div class="col-lg-6">
+														<ul class="_htg452 _abcd145">												
+															{{course_data.description|capfirst}}
+														</ul>
+													</div>
+													<div class="col-lg-6">
+													</div>
+												</div>
+											</div>
+										</div>							
+									</div>							
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endblock %}

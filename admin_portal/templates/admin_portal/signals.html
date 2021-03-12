@@ -1,0 +1,59 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					
+					<div class="col-lg-9 col-md-7">
+						<div class="press_news">
+							<h2>KXT 'DEMY Signals</h2>
+							<p>Latest Signals </p>
+							{% for signal in signals %}
+							<ul>
+								<div class="press_item mt-35">
+									<div class="vdtopress">{{signal.signal_date|naturaltime}}</div>
+									<h4>{{signal.signal_title}}</h4>
+									<p class="blog_des">{{signal.signal_content}}</p>
+									
+								</div>
+							</ul>
+							{% endfor %}
+						</div>
+						<br>
+						<br>
+					</div>
+			
+					
+
+
+			</div>
+			{% if signals.has_other_pages %}
+						<ul class="pagination">
+							{% if signals.has_previous %}
+							<li><a href="?page={{ signals.previous_page_number }}">&laquo;</a></li>
+							{% else %}
+							<li class="disabled"><span>&laquo;</span></li>
+							{% endif %}
+							{% for i in signals.paginator.page_range %}
+							{% if signals.number == i %}
+								<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+							{% else %}
+								<li><a href="?page={{ i }}">{{ i }}</a></li>
+							{% endif %}
+							{% endfor %}
+							{% if signals.has_next %}
+							<li><a href="?page={{ signals.next_page_number }}">&raquo;</a></li>
+							{% else %}
+							<li class="disabled"><span>&raquo;</span></li>
+							{% endif %}
+						</ul>
+						{% endif %}
+		</div>
+
+	{% endblock %}

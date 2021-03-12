@@ -1,0 +1,85 @@
+﻿	{% extends 'registration/base.html' %}
+
+	<body class="sign_in_up_bg">
+	{% block content %}
+	{% load static %}
+	<!-- Signup Start -->
+	<div class="sign_in_up_bg">
+		<div class="container">
+			<div class="row justify-content-lg-center justify-content-md-center">
+				<div class="col-lg-12">
+					<div class="main_logo25" id="logo">
+						<a href="index.html"><img src="images/main_logo.png" alt=""></a>
+						<a href="index.html"><img class="logo-inverse" src="images/main_logo2.png" alt=""></a>
+					</div>
+				</div>
+			
+				<div class="col-lg-6 col-md-8">
+					<div class="sign_form">
+						<h2>Welcome to KXT 'DEMY</h2>
+						<p>Sign Up and Start Learning!</p>
+
+						<button class="social_lnk_btn color_btn_fb"><i class="uil uil-facebook-f"></i>Continue with Facebook</button>
+						<button class="social_lnk_btn mt-15 color_btn_go"><i class="uil uil-google"></i>Continue with Google</button>
+						
+						<form method="POST">
+							{% csrf_token %}
+							{% if form.errors %}
+							<!-- Error messaging -->
+							<div id="errors">
+								<div class="inner">
+									<p>There were some errors in the information you entered. Please correct the following:</p>
+									<ul>
+										{% for field in form %}
+											{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+							<!-- /Error messaging -->
+						{% endif %}
+						<!-- {% include 'registration/messages.html' %} -->
+
+							<div class="ui search focus">
+								<br><br>
+								<div class="ui left icon input swdh11 swdh19">
+									<input class="prompt srch_explore" type="text" name="username" value="" id="id_fullname" required="" maxlength="64" placeholder="Username">															
+								</div>
+							</div>
+							<div class="ui search focus mt-15">
+								<div class="ui left icon input swdh11 swdh19">
+									<input class="prompt srch_explore" type="email" name="email" value="" id="id_email" required="" maxlength="64" placeholder="Email Address">															
+								</div>
+							</div>
+							<div class="ui search focus mt-15">
+								<div class="ui left icon input swdh11 swdh19">
+									<input class="prompt srch_explore" type="password" name="password1" value="" id="id_password" required="" maxlength="64" placeholder="Password">															
+								</div>
+							</div>
+							<div class="ui search focus mt-15">
+								<div class="ui left icon input swdh11 swdh19">
+									<input class="prompt srch_explore" type="password" name="password2" value="" id="id_password" required="" maxlength="64" placeholder="Confirm Password">															
+								</div>
+							</div>
+							
+							<div class="ui form mt-30 checkbox_sign">
+								<div class="inline field">
+									<div class="ui checkbox mncheck">
+										<input type="checkbox" tabindex="0" class="hidden">
+										<label>I’m in for emails when there's any update</label>
+									</div>
+								</div>
+							</div>
+							<input type="submit" value="Submit" class="login-btn"/>
+							<!-- <button class="login-btn" type="submit">Next</button> -->
+						</form>
+						<p class="sgntrm145">By signing up, you agree to our <a href="terms_of_use.html">Terms of Use</a> and <a href="terms_of_use.html">Privacy Policy</a>.</p>
+						<p class="mb-0 mt-30">Already have an account? <a href="{% url 'authentication:login' %}">Log In</a></p>
+					</div>
+					<div class="sign_footer"><img src="" alt="">© 2020 <strong>KXT 'DEMY</strong>. All Rights Reserved.</div>
+				</div>				
+			</div>				
+		</div>				
+	</div>
+	<!-- Signup End -->	
+{% endblock %}

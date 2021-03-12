@@ -1,0 +1,135 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-xl-12 col-lg-8">
+						<div class="section3125">
+							<div class="explore_search">
+								<div class="ui search focus">
+									<div class="ui left icon input swdh11">
+										<input class="prompt srch_explore" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more..">
+										<i class="uil uil-search-alt icon icon2"></i>
+									</div>
+								</div>
+							</div>							
+						</div>							
+					</div>
+					<div class="col-md-12">
+						{% include 'registration/messages.html' %}
+					</div>
+					<div class="col-md-12">
+						<div class="_14d25">
+							<div class="row">
+								{% if 'all_ebooks' or 'all_audios' in request.path %}
+									{% for course in ordered_courses %}
+										<div class="col-lg-3 col-md-4">
+											<div class="fcrse_1 mt-30">
+												<a href="{% url 'members_portal:course_detail' course.id %}" class="fcrse_img">
+													{% if course.cover_img %}
+														<img src="{{ course.cover_img.url }}" height="100" alt="">
+													{% else %}
+														<img src="{% static 'images/courses/img-1.jpg' %}" alt="">
+													{% endif %}
+													<div class="course-overlay">
+														<div class="badge_seller">Most Rated</div>
+														<span class="play_btn1"><i class="uil uil-play"></i></span>
+														<div class="crse_timer">
+															{{course.duration}}
+														</div>
+													</div>
+												</a>
+												<div class="fcrse_content">
+													
+														<div class="eps_dots more_dropdown">
+															<i class="uil uil-ellipsis-v"></i>
+															<div class="dropdown-content">
+																{% if course.id in checked_result %}
+																<a href="{% url 'members_portal:save_course' course.id %}">	
+																	<span><i class="uil uil-heart"></i>Remove favorite</span>
+																</a>
+															{% else %}
+																<a href="{% url 'members_portal:save_course' course.id %}">	
+																	<span><i class="uil uil-heart"></i>Save favorite</span>
+																</a>
+															{% endif %} 
+															</div>																											
+														</div>
+													<div class="vdtodt">
+														<!-- <span class="vdt14">109k views</span> -->
+														<span class="vdt14">{{course.created_date}}</span>
+													</div>
+													<a href="{% url 'members_portal:course_detail' course.id %}" class="crse14s">{{course.title|title}}</a>
+													<a href="#" class="crse-cate">{{course.membership|title}}</a>
+												</div>
+											</div>													
+										</div>
+									{% endfor %}
+								{% endif %}
+
+								{% if 'fav_ebooks' or 'fav_videos' or 'fav_audios' in request.path %}
+									{% for course in all_fav_courses %}
+										<div class="col-lg-3 col-md-4">
+											<div class="fcrse_1 mt-30">
+												{{course.fav_course.url}}
+												<a href="{% url 'members_portal:course_detail' course.fav_course.id %}" class="fcrse_img">
+													{% if course.fav_course.cover_img %}
+														<img src="{{ course.fav_course.cover_img.url}}" height="100" alt="">
+													{% else %}
+														<img src="{% static 'images/courses/img-1.jpg' %}" alt="">
+													{% endif %}
+													<div class="course-overlay">
+														<div class="badge_seller">Most Rated</div>
+														<span class="play_btn1"><i class="uil uil-play"></i></span>
+														<div class="crse_timer">
+															{{course.fav_course.duration}}
+														</div>
+													</div>
+												</a>
+												<div class="fcrse_content">
+														<div class="eps_dots more_dropdown">
+															<i class="uil uil-ellipsis-v"></i>
+															<div class="dropdown-content">
+															{% if course.fav_course.id in checked_result %}
+																<a href="{% url 'members_portal:save_course' course.fav_course.id %}">	
+																	<span><i class="uil uil-heart"></i>Remove favorite</span>
+																</a>
+															{% else %}
+																<a href="{% url 'members_portal:save_course' course.fav_course.id %}">	
+																	<span><i class="uil uil-heart"></i>Save favorite</span>
+																</a>
+															{% endif %} 
+															</div>																											
+														</div>
+													<div class="vdtodt">
+														<span class="vdt14">{{course.fav_course.created_date}}</span>
+													</div>
+													<a href="{% url 'members_portal:course_detail' course.id %}" class="crse14s">{{course.fav_course.title|title}}</a>
+													<a href="#" class="crse-cate">{{course.fav_course.membership|title}}</a>
+												</div>
+											</div>													
+										</div>
+									{% endfor %}
+								{% endif %}
+							
+								<div class="col-md-12">
+									<div class="main-loader mt-50">													
+										<div class="spinner">
+											<div class="bounce1"></div>
+											<div class="bounce2"></div>
+											<div class="bounce3"></div>
+										</div>																										
+									</div>
+								</div>
+							</div>				
+						</div>				
+					</div>				
+				</div>
+			</div>
+		</div>
+	{% endblock %}

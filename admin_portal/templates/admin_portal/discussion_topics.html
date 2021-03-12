@@ -1,0 +1,53 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					
+					<div class="col-lg-9 col-md-7">
+						<div class="press_news">
+							<h2>KXT' Discussion Topics</h2>
+							<p>Click on any topic of your choice to contribute in the discussion or ask question on the topic. </p>
+							<br>
+							<a href="{% url 'admin_portal:discussion_topic' %}">
+								<button  type="submit" class="btn btn-default steps_btn">Create New Topic</button>
+							</a>
+							{% for topic in topics %}
+							<ul>
+								<li>
+									<div class="press_item mt-35">
+										<div class="vdtopress">{{topic.created_date|naturaltime}}</div>
+										<h4>{{topic.topic}}</h4>
+										<p class="blog_des">{{topic.content}}<span style="float: right;">  
+											{% if request.user.is_staff %}
+												<a href="{% url 'admin_portal:discussions' id=topic.id %}">
+													<button  type="submit" class="btn btn-default steps_btn">Join Discussion</button>
+												</a>
+											{% else %}
+												<a href="{% url 'members_portal:discussions' id=topic.id %}">
+													<button  type="submit" class="btn btn-default steps_btn">Join Discussion</button>
+												</a>
+											{% endif %}
+											</span>
+										</p>
+									</div>
+								</li>
+							</ul>
+							{% endfor %}
+						</div>
+						<br>
+						<br>
+					</div>
+			
+			</div>
+		</div>
+	</div>
+	<!-- Body End -->
+
+	{% endblock %}

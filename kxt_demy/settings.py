@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'g1$%0u25w^$tyj6_^q2v+8e=o47&aufes5!_*360%^=4%-zkx^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['136.244.113.115', "kxtdemy", "0.0.0.0"]
 
 
 # Application definition
@@ -37,10 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'registration',
+    'members_portal',
+    'social_django',
+    'admin_portal',
+    'background_task',
+    # 'sweetify',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+ #   'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -54,14 +63,22 @@ ROOT_URLCONF = 'kxt_demy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
+                'django.template.context_processors.debug', 
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'members_portal.context_processors.general_info',
+                'members_portal.context_processors.created_check',
+                'members_portal.context_processors.check_fav',
+                'members_portal.context_processors.user_img',
+                'members_portal.context_processors.check_plan',
+                'members_portal.context_processors.market',
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
@@ -83,9 +100,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kxt_demy',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '/Applications/MAMP/tmp/mysql/mysql.sock',
-        'PORT': '8888',
+        'PASSWORD': 'Point066##@@',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -109,6 +126,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+AUTHENTICATION_BACKENDS = (
+    # 'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -123,7 +149,29 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
+
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static_media/')
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.kxtdemy.com'
+EMAIL_PORT = '25'
+EMAIL_HOST_USER = 'info@kxtdemy.com'
+EMAIL_HOST_PASSWORD = 'Point066##@@'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+# SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert-success',
+    messages.INFO: 'alert-info',
+    messages.ERROR: 'alert-danger',
+}

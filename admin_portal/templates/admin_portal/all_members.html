@@ -1,0 +1,36 @@
+﻿{% extends 'members_portal/base.html' %}
+<body>
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-xl-9 col-lg-8">
+						<div class="section3125">
+							<h4 class="item_title">All Approved Members</h4>
+							<div class="la5lo1">
+								<div class="row">
+									{% for member in members %}
+										<div class="col-md-3">
+											<div class="stream_1 mb-30">
+												<a href="" class="stream_bg">
+													<img src="{{member.profile_img.url}}" alt="">
+													<h4>{{member.surname}} {{member.name}}</h4>
+													{{member.profession}}<br>
+													{{member.phone_number}}<br>
+												</a>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	{% endblock %}
